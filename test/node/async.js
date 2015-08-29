@@ -1,51 +1,78 @@
+/* global describe, it, assert */
+
 var fs = require('../..')
-  , path = require('path')
-  , existingFile = path.join(__dirname, 'async.js')
-  , nonExistingFile = path.join(__dirname, 'non-existing-file.js');
+var path = require('path')
+var existingFile = path.join(__dirname, 'async.js')
+var nonExistingFile = path.join(__dirname, 'non-existing-file.js')
+var packagePath = path.join(__dirname, '../..', 'package.json')
 
+describe('vigour-fs-promised', function () {
 
-describe('fs.existsAsync', function(){
-
-  it('should return a promise with a single true argument', function(done){
-    fs.existsAsync( existingFile )
-      .then(function(exists){
-        assert.ok(exists);
-      })
-      .done( done );
-  });
-
-  it('should return a promise with a single false argument', function(done){
-    fs.existsAsync( nonExistingFile )
-      .then(function(exists){
-        assert.notOk(exists);
-      })
-      .done( done );
-  });
-
-  it('fs.readFileAsync on an existing file', function(done){
-    fs.readFileAsync(existingFile, 'utf8')
-      .then(function(data){
-        assert.ok(data);
-      })
-      .done( done );
+  it('exists should `cb(true)`'
+  , function (done) {
+    fs.exists(existingFile, function (exists) {
+      assert.equal(exists, true)
+      done()
+    })
   })
 
-  it('fs.readFileAsync on an existing file', function(done){
-    fs.readFileAsync(nonExistingFile, 'utf8')
-      .catch(function(err){
-        assert.ok(err);
-      })
-      .done( done );
-  });
+  it('exists should `cb(null, true)`'
+  , function (done) {
+    fs.exists(existingFile, function (err, exists) {
+      assert.equal(err, null)
+      assert.equal(exists, true)
+      done()
+    })
+  })
 
-  it('fs.readJSONAsync on package.json', function(done){
-    var packagePath = path.join(__dirname, '../..', 'package.json');
-    fs.readJSONAsync(packagePath)
-      .then(function(jsonData){
-        assert.ok(jsonData);
-        assert.equal(jsonData.name, 'vigour-fs-promised');
+  it('existsAsync should return a promise for `true`'
+  , function () {
+    return fs.existsAsync(existingFile)
+      .then(function (exists) {
+        assert.ok(exists)
       })
-      .done( done )
-  });
+  })
 
-});
+  it('existsAsync should return a promise for `false`'
+  , function () {
+    return fs.existsAsync(nonExistingFile)
+      .then(function (exists) {
+        assert.notOk(exists)
+      })
+  })
+
+  it('readFileAsync should return a promise for the contents of the file'
+  , function () {
+    return fs.readFileAsync(existingFile, 'utf8')
+      .then(function (data) {
+        assert.ok(data)
+      })
+  })
+
+  it('readFileAsync should return a promise and reject it'
+  , function () {
+    return fs.readFileAsync(nonExistingFile, 'utf8')
+      .catch(function (err) {
+        assert.ok(err)
+      })
+  })
+
+  it('readJSON should `cb(null, JSON.parse(package.json))`'
+  , function () {
+    return fs.readJSON(packagePath, function (err, obj) {
+      assert.equal(err, null)
+      assert.ok(obj)
+      assert.equal(obj.name, 'vigour-fs-promised')
+    })
+  })
+
+  it('readJSONAsync should return a promise for the parsed package'
+  , function () {
+    return fs.readJSONAsync(packagePath)
+      .then(function (jsonData) {
+        assert.ok(jsonData)
+        assert.equal(jsonData.name, 'vigour-fs-promised')
+      })
+  })
+
+})

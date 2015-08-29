@@ -1,7 +1,7 @@
 {
   "name": "vigour-fs-promised",
   "version": "1.0.0",
-  "description": "vigour-fs but with methods returning promises",
+  "description": "vigour-fs, but methods return promises",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/gaston test node"
@@ -12,17 +12,12 @@
   },
   "keywords": [
     "vigour-fs",
-    "promise"
+    "promise",
+    "bluebird"
   ],
   "contributors": [
-    {
-      "name": "Shawn Inder",
-      "email": "shawn@vigour.io"
-    },
-    {
-      "name": "Andre Padez",
-      "email": "andre@vigour.io"
-    }
+    "Andre Padez <andre@vigour.io>",
+    "Shawn Inder <shawn@vigour.io>"
   ],
   "engines": {},
   "author": "Vigour",
@@ -37,5 +32,8 @@
   },
   "devDependencies": {
     "gaston": "^0.11.0"
+  },
+  "directories": {
+    "test": "test"
   }
 }

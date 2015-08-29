@@ -1,4 +1,4 @@
 var fs = module.exports = require('vigour-fs')
-  , Promise = require('bluebird');
+var Promise = require('bluebird')
 
-Promise.promisifyAll(fs);
+Promise.promisifyAll(fs)

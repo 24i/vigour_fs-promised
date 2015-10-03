@@ -1,17 +1,14 @@
-/* global describe, it, assert */
-
 var fs = require('../..')
 var path = require('path')
-var existingFile = path.join(__dirname, 'async.js')
+var existingFile = path.join(__filename)
 var nonExistingFile = path.join(__dirname, 'non-existing-file.js')
-var packagePath = path.join(__dirname, '../..', 'package.json')
+var packagePath = path.join(__dirname, '..', '..', 'package.json')
 
 describe('vigour-fs-promised', function () {
-
   it('exists should `cb(true)`'
   , function (done) {
     fs.exists(existingFile, function (exists) {
-      assert.equal(exists, true)
+      expect(exists).to.be.true
       done()
     })
   })
@@ -19,8 +16,8 @@ describe('vigour-fs-promised', function () {
   it('exists should `cb(null, true)`'
   , function (done) {
     fs.exists(existingFile, function (err, exists) {
-      assert.equal(err, null)
-      assert.equal(exists, true)
+      expect(err).to.be.null
+      expect(exists).to.be.true
       done()
     })
   })
@@ -29,7 +26,7 @@ describe('vigour-fs-promised', function () {
   , function () {
     return fs.existsAsync(existingFile)
       .then(function (exists) {
-        assert.ok(exists)
+        expect(exists).to.be.true
       })
   })
 
@@ -37,7 +34,7 @@ describe('vigour-fs-promised', function () {
   , function () {
     return fs.existsAsync(nonExistingFile)
       .then(function (exists) {
-        assert.notOk(exists)
+        expect(exists).to.be.false
       })
   })
 
@@ -45,7 +42,7 @@ describe('vigour-fs-promised', function () {
   , function () {
     return fs.readFileAsync(existingFile, 'utf8')
       .then(function (data) {
-        assert.ok(data)
+        expect(data).to.exist
       })
   })
 
@@ -53,16 +50,16 @@ describe('vigour-fs-promised', function () {
   , function () {
     return fs.readFileAsync(nonExistingFile, 'utf8')
       .catch(function (err) {
-        assert.ok(err)
+        expect(err).to.exist
       })
   })
 
   it('readJSON should `cb(null, JSON.parse(package.json))`'
   , function () {
     return fs.readJSON(packagePath, function (err, obj) {
-      assert.equal(err, null)
-      assert.ok(obj)
-      assert.equal(obj.name, 'vigour-fs-promised')
+      expect(err).to.be.null
+      expect(obj).to.exist
+      expect(obj.name).to.equal('vigour-fs-promised')
     })
   })
 
@@ -70,9 +67,8 @@ describe('vigour-fs-promised', function () {
   , function () {
     return fs.readJSONAsync(packagePath)
       .then(function (jsonData) {
-        assert.ok(jsonData)
-        assert.equal(jsonData.name, 'vigour-fs-promised')
+        expect(jsonData).to.exist
+        expect(jsonData.name).to.equal('vigour-fs-promised')
       })
   })
-
 })

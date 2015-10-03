@@ -1,6 +1,6 @@
 {
   "name": "vigour-fs-promised",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "vigour-fs, but methods return promises",
   "main": "index.js",
   "scripts": {
@@ -37,6 +37,15 @@
     "test": "test"
   },
   "standard": {
-    "globals": [ "describe", "it", "expect", "before", "after", "beforeEach", "afterEach", "sinon" ]
+    "globals": [
+      "describe",
+      "it",
+      "expect",
+      "before",
+      "after",
+      "beforeEach",
+      "afterEach",
+      "sinon"
+    ]
   }
 }

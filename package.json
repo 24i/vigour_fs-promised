@@ -28,12 +28,15 @@
   "homepage": "https://github.com/vigour-io/vigour-fs-promised#readme",
   "dependencies": {
     "bluebird": "^2.9.34",
-    "vigour-fs": "^2.0.0"
+    "vigour-fs": "^3.0.0"
   },
   "devDependencies": {
     "gaston": "^0.11.0"
   },
   "directories": {
     "test": "test"
+  },
+  "standard": {
+    "globals": [ "describe", "it", "expect", "before", "after", "beforeEach", "afterEach", "sinon" ]
   }
 }

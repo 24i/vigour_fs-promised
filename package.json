@@ -1,6 +1,6 @@
 {
   "name": "vigour-fs-promised",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "vigour-fs, but methods return promises",
   "main": "index.js",
   "scripts": {

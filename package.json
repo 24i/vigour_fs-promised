@@ -4,7 +4,7 @@
   "description": "vigour-fs, but methods return promises",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/gaston test node"
+    "test": "gaston test node"
   },
   "repository": {
     "type": "git",
@@ -27,11 +27,8 @@
   },
   "homepage": "https://github.com/vigour-io/vigour-fs-promised#readme",
   "dependencies": {
-    "bluebird": "^2.9.34",
-    "vigour-fs": "^3.0.0"
-  },
-  "devDependencies": {
-    "gaston": "^0.11.0"
+    "bluebird": "^3.3.4",
+    "vigour-fs": "^3.0.6"
   },
   "directories": {
     "test": "test"
